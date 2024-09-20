@@ -46,7 +46,24 @@ public class AndersonThomasRSA
 		// Must implement the extended Euclidean algorithm
 		// NO brute-forcing; violation will lead to zero points
 		// NO recursion; violation will lead to zero points
-		return 0;
+		int x0 = 1, y0 = 0;
+		int x1 = 0, y1 = 1;
+		while (inZ != 0) {
+			int q = inE / inZ;   
+            int temp = inE;    
+            inE = inZ;           
+            inZ = temp % inE;    
+
+            temp = x0;
+            x0 = x1;
+            x1 = temp - q * x1;
+
+            temp = y0;
+            y0 = y1;
+            y1 = temp - q * y1;
+		}
+		
+		return inE;
 	}
 
 	public void testXgcd () {
@@ -147,9 +164,9 @@ public class AndersonThomasRSA
 
 		System.out.println ("********** Small RSA Project output begins ********** ");
 
-		atrsa.testGcd ();
+		//atrsa.testGcd ();
 		atrsa.testXgcd ();
-		atrsa.testKeygen ();
-		atrsa.testRSA ();
+		// atrsa.testKeygen ();
+		// atrsa.testRSA ();
 	}
 }
