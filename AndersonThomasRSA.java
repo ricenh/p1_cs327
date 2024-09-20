@@ -46,24 +46,32 @@ public class AndersonThomasRSA
 		// Must implement the extended Euclidean algorithm
 		// NO brute-forcing; violation will lead to zero points
 		// NO recursion; violation will lead to zero points
-		int x0 = 1, y0 = 0;
-		int x1 = 0, y1 = 1;
-		while (inZ != 0) {
-			int q = inE / inZ;   
-            int temp = inE;    
-            inE = inZ;           
-            inZ = temp % inE;    
+		// Initialize variables
+        int oldR = inE, r = inZ; 
+        int oldS = 1, s = 0;     
+        int oldT = 0, t = 1;     
 
-            temp = x0;
-            x0 = x1;
-            x1 = temp - q * x1;
+        while (r != 0) {
+            int q = oldR / r;
 
-            temp = y0;
-            y0 = y1;
-            y1 = temp - q * y1;
-		}
-		
-		return inE;
+            int tempR = r;
+            r = oldR - q * r;
+            oldR = tempR;
+
+            int tempS = s;
+            s = oldS - q * s;
+            oldS = tempS;
+
+            int tempT = t;
+            t = oldT - q * t;
+            oldT = tempT;
+        }
+
+        if (oldR == 1) {
+            return (oldS % inZ + inZ) % inZ;
+        } else {
+            return 0;
+        }
 	}
 
 	public void testXgcd () {
@@ -79,14 +87,15 @@ public class AndersonThomasRSA
 	}
 
 	public int[] keygen (int inP, int inQ, int inE) {
-		// TO BE FINISHED
-		int[] ret = {};
+		int n = inP * inQ;
+		int z = (inP - 1) * (inQ - 1);
+		int d = xgcd (inE, z);
+		int[] ret = {inE, n, d};
 		return ret;
 	}
 
 	//
 	// The following method will return an integer array, with [e, N, d] in this order
-	//
 	public void testKeygen () {
 		int[] keypair = keygen (17, 19, 29);
 
@@ -94,19 +103,7 @@ public class AndersonThomasRSA
 		System.out.println ("N = 0x" + Integer.toString(keypair[1], 16));
 		System.out.println ("d = 0x" + Integer.toString(keypair[2], 16));
 	}
-
-	//
-	// Calculate c = a^b mod n, with the square-and-multiply algorithm
-	//
-	// The following method implements the square-and-multiply algorithm, with Java primitive types
-	//
-	// Note that even with primitive types, a^b may well exceed the range of Java int
-	// For example, 5^20 is too big to be held by a Java primitive integer
-	//
-	// public int modExp (int a, int b, int n) {
-	// 	// TO BE FINISHED
-	// 	return 0;
-	// }
+	
 
 	//
 	// Calculate c = a^b mod n
@@ -164,9 +161,9 @@ public class AndersonThomasRSA
 
 		System.out.println ("********** Small RSA Project output begins ********** ");
 
-		//atrsa.testGcd ();
+		atrsa.testGcd ();
 		atrsa.testXgcd ();
-		// atrsa.testKeygen ();
+		atrsa.testKeygen ();
 		// atrsa.testRSA ();
 	}
 }
