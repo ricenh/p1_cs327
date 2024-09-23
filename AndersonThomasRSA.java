@@ -5,12 +5,16 @@ package p1_cs327;
  * @author Xunhua Wang. All rights reserved.
  * @date 02/16/2012; revised on 09/27/2018; further refined on 09/20/2019, 09/29/2020, 10/07/2022, 03/13/2023; 09/14/2024
  * 
+ * Ainsley Ayers
+ * Noah Rice
+ * 
+ * INSTRUCTIONS:
+ * To run the code type "javac filename" and then "java filename" in terminal
  */
 
 public class AndersonThomasRSA
 {
 	public int gcd (int inE, int inZ) {
-		// TO BE FINISHED
 		// Must implement Euclid's algorithm
 		// NO brute-forcing; violation will lead to zero points
 		// NO recursion; violation will lead to zero points
@@ -42,7 +46,7 @@ public class AndersonThomasRSA
 	//	inverse of inE mod inZ
 	//
 	public int xgcd (int inE, int inZ) {
-		// TO BE FINISHED
+
 		// Must implement the extended Euclidean algorithm
 		// NO brute-forcing; violation will lead to zero points
 		// NO recursion; violation will lead to zero points
@@ -162,6 +166,6 @@ public class AndersonThomasRSA
 		atrsa.testGcd ();
 		atrsa.testXgcd ();
 		atrsa.testKeygen ();
-		// atrsa.testRSA ();
+		atrsa.testRSA ();
 	}
 }
