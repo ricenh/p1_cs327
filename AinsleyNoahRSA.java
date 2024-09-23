@@ -12,7 +12,7 @@ package p1_cs327;
  * To run the code type "javac filename" and then "java filename" in terminal
  */
 
-public class AndersonThomasRSA
+public class AinsleyNoahRSA
 {
 	public int gcd (int inE, int inZ) {
 		// Must implement Euclid's algorithm
@@ -159,7 +159,7 @@ public class AndersonThomasRSA
 	}
 
 	public static void main (String[] args) {
-		AndersonThomasRSA atrsa = new AndersonThomasRSA ();
+		AinsleyNoahRSA atrsa = new AinsleyNoahRSA ();
 
 		System.out.println ("********** Small RSA Project output begins ********** ");
 
